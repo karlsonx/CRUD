@@ -10,7 +10,7 @@ module.exports = {
       devServer: {
         publicPath: '/build',
         proxy: {
-            '/api': 'http://localhost:3000'
+            '/todos': 'http://localhost:3000'
           }
       },
     module: {

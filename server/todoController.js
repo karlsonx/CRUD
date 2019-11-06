@@ -37,10 +37,10 @@ todoController.getTodos = (req,res, next) => {
     db.query(textQuery)
     .then (result => {
         res.locals.todos = result.rows;
-        next();
+        return next();
     })
     .catch(err => {
-        console.log('Error in todoController.fetTodos', err)
+        console.log('Error in todoController.getTodos', err)
         return res.sendStatus(500)
     })
 }
