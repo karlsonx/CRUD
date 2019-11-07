@@ -16,7 +16,10 @@ app.post('/todos', todoController.addTodo, (req,res) => {
     res.json(res.locals.todos)
 })
 
-
+app.delete('/:id', todoController.deleteTodos, (req,res) => {
+    console.log("Item for deletion", req.body)
+    res.json(res.locals.todos)
+})
 
 
 // Here are the error statements
