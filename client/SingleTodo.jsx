@@ -12,33 +12,31 @@ class SingleTodo extends Component {
         // date
         // completion
         // deleteTask
+
     }
+
+   
     
     render() {
-        console.log('Props on SingleTodo', this.props)
+
+        //Here we are converting the date into a normal lookimg date with proper length
+        const d = new Date()
+        const date = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear()
+   
         return (
-            <div>
-                <p>{this.props.topic}</p>
-                <p>{this.props.text}</p>
-                <button onClick={this.props.deleteTask}>Delete</button>
+            <div className="single-todo">
+            {/* <!-- Table header --> */}
+                        <div className="singles" id="id" >{this.props.id}</div>
+                        <div className="singles" id="topic" >{this.props.topic}</div>
+                        <div className="singles" id="text" >{this.props.text}</div>
+                        <div className="singles" id="date" >{date}</div>
+                {/* On click we will pass the current id up the chain */}
+                <button id="deleteBtn" onClick={ () => {this.props.deleteTask(this.props.id)}}>X</button> 
             </div>
         )
 
        
     }
 }
-
-
-// function SingleTodo2(todo_id, topic, text, date, completion, deleteTask) {
-//     return (
-//         <div>
-//             <p>{topic}</p>
-//             <button onClick={deleteTask}>Delete</button>
-//         </div>
-//     )
-// }
-
-{/* {fetchedTodos.map(todo => 
-<div key={todo.todo_id}> {todo.text} </div>)} */}
 
 export default SingleTodo;

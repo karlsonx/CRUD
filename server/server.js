@@ -12,11 +12,11 @@ app.get('/todos', todoController.getTodos, (req, res) => {
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.post('/todos', todoController.addTodo, (req,res) => {
+app.post('/todos', todoController.addTodo,todoController.getTodos, (req,res) => {
     res.json(res.locals.todos)
 })
 
-app.delete('/:id', todoController.deleteTodos, (req,res) => {
+app.delete('/todos', todoController.deleteTodos,todoController.getTodos, (req,res) => {
     console.log("Item for deletion", req.body)
     res.json(res.locals.todos)
 })

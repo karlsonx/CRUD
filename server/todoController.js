@@ -72,6 +72,7 @@ todoController.getTodos = (req,res, next) => {
     db.query(textQuery)
     .then (result => {
         res.locals.todos = result.rows;
+        console.log('Res.locals.todos, line 75, todoController.jsx', res.locals.todos)
         return next();
     })
     .catch(err => {

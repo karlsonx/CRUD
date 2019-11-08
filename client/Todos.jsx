@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SingleTodo from './SingleTodo.jsx';
+import Form from './Form.jsx'
 
 
 class Todos extends Component {
@@ -7,14 +8,14 @@ class Todos extends Component {
         super(props)
         this.state = ({
           todosArray : [],
-          isLoaded: false,
         })
       
-        this.deleteTask = this.deleteTask.bind(this);
+       this.deleteTask = this.deleteTask.bind(this);
+       this.addTodo = this.addTodo.bind(this)
     } // end constructor
 
     componentDidMount() {
-        fetch(this.props.fetchUrl)
+        fetch('/todos')
             .then((response) => response.json())
             .then((responseJson) => {
               this.setState({
@@ -26,10 +27,59 @@ class Todos extends Component {
               });
     }
 
-    deleteTask() {
-        // delete task functionality
-        console.log('this should delete something');
+
+    deleteTask(id) {
+        fetch('/todos', {
+            method: 'delete',
+            body: JSON.stringify({"todo_id": id}),
+            headers: {
+                "Content-Type": "application/json"
+              },
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({
+          todosArray: responseJson,
+          });
+        })
+        .catch((error) =>{
+            console.error('Possible fetch error',error);
+          });
+        console.log(id)
     }
+
+
+
+    addTodo(topic, text) {
+      //format 
+
+
+      fetch('/todos', {
+          method: 'post',
+          body: JSON.stringify({
+              "topic": topic,
+              "text" : text,
+              "date": new Date(),
+              "completion" : false,
+          }),
+          headers: {
+              "Content-Type": "application/json"
+            },
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+        todosArray: responseJson,
+        });
+      })
+      .catch((error) =>{
+          console.error('Possible fetch error',error);
+        });
+      console.log(this.state.todosArray)
+  }
+
+
+
 
     render() {
         //We create new array where we will pass every property we need for a single element (and pass it to the childern component)
@@ -40,12 +90,16 @@ class Todos extends Component {
 //We create a var representing the item in every iteration for easier usage
 //we pass all the properties for a single element we need down the chain
             const currentTodoItem = this.state.todosArray[i];
-            fetchedTodos.push(<SingleTodo key={currentTodoItem.todo_id} text={currentTodoItem.text} topic={currentTodoItem.topic} completion={currentTodoItem.completion} date={currentTodoItem.date} deleteTask={this.deleteTask} />)
+            fetchedTodos.push(<SingleTodo key={currentTodoItem.todo_id} id={currentTodoItem.todo_id} text={currentTodoItem.text} topic={currentTodoItem.topic} completion={currentTodoItem.completion} date={currentTodoItem.date} deleteTask={this.deleteTask} />)
         }
 
         return (
-            <div>
-                <h1>I am the Todos.jsx</h1>
+            <div className="todos-wrapper">
+                <div className='titles'>
+                  <h1>Personal Goals</h1>
+                  <h2>What I need to do to become a rockstar dev?</h2>
+                </div>
+                <Form addTodo={this.addTodo} />
                 {fetchedTodos}
             </div>
         )
