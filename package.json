@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/karlsonx/CRUD.git"
+    "url": "git+https://github.com/karlsonx/CRUD.git/"
   },
   "author": "",
   "license": "ISC",
