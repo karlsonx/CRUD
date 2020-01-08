@@ -59,7 +59,6 @@ todoController.deleteTodos = (req,res,next) => {
         res.locals.todos = result.rows;
         return next();
     })
-
 }
 
 // ----GET-----------------------------------------

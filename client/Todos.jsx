@@ -52,8 +52,6 @@ class Todos extends Component {
 
     addTodo(topic, text) {
       //format 
-
-
       fetch('/todos', {
           method: 'post',
           body: JSON.stringify({
