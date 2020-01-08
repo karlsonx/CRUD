@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/karlsonx/CRUD/issues"
   },
-  "homepage": "https://github.com/karlsonx/CRUD#readme",
+  "homepage": "https://kirilchristov.github.io/CRUD",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
